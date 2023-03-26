@@ -39,6 +39,7 @@ dependencies:
   provider:
   shimmer:
   path_provider:
+  smooth_page_indicator: 
 
 dev_dependencies:
   flutter_test:

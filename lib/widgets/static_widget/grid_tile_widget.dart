@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:freegames/models/game_moel.dart';
+
+import '../../models/game_model.dart';
 
 class GridTileWidget extends StatelessWidget {
   const GridTileWidget({super.key, required this.gameModel});

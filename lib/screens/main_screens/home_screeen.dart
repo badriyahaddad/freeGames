@@ -1,16 +1,12 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:freegames/models/game_moel.dart';
-
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import '../../models/details_model.dart';
 
-import '../providers/games_provider.dart';
-import '../providers/theme_provider.dart';
-import '../widgets/static_widget/grid_tile_widget.dart';
-import '../widgets/static_widget/shimmer_widget.dart';
+import '../../providers/games_provider.dart';
+import '../../providers/theme_provider.dart';
+import '../../widgets/static_widget/grid_tile_widget.dart';
+import '../../widgets/static_widget/shimmer_widget.dart';
+import '../sub_screens/details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -23,7 +19,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
-
   String? platform;
 
   @override
@@ -136,17 +131,38 @@ class _HomeScreenState extends State<HomeScreen> {
                                 itemBuilder: (BuildContext context, int index) {
                                   return gamesConsumer.isLoading
                                       ? ShimmerWidget(
-                                          baseColor: const Color.fromARGB(
-                                              213, 49, 49, 49),
+                                          baseColor: themeListener.isDark
+                                              ? Color.fromARGB(
+                                                  255, 223, 223, 223)
+                                              : const Color.fromARGB(
+                                                  255, 61, 61, 61),
                                           height: size.width / 4,
-                                          hilighColor: const Color.fromARGB(
-                                              255, 65, 65, 65),
+                                          hilighColor: themeListener.isDark
+                                              ? Color.fromARGB(
+                                                  255, 243, 243, 243)
+                                              : const Color.fromARGB(
+                                                  255, 92, 92, 92),
                                           radius: 8,
                                           width: size.width / 4,
                                         )
-                                      : GridTileWidget(
-                                          gameModel:
-                                              gamesConsumer.gameList[index],
+                                      : InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        DetailsScreen(
+                                                          detailsModelID:
+                                                              gamesConsumer
+                                                                  .gameList[
+                                                                      index]
+                                                                  .id,
+                                                        )));
+                                          },
+                                          child: GridTileWidget(
+                                            gameModel:
+                                                gamesConsumer.gameList[index],
+                                          ),
                                         );
                                 },
                               ),

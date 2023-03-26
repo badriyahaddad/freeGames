@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:freegames/providers/games_provider.dart';
 import 'package:freegames/providers/theme_provider.dart';
-import 'package:freegames/screens/home_screeen.dart';
+import 'package:freegames/screens/main_screens/home_screeen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
                   : const Color.fromARGB(255, 49, 49, 49),
               appBarTheme: AppBarTheme(
                 iconTheme: IconThemeData(
-                    color: themeConsumer.isDark ? Colors.white : Colors.black),
+                    color: themeConsumer.isDark ? Colors.black : Colors.white),
                 color: themeConsumer.isDark ? Colors.black : Colors.white,
                 titleTextStyle: TextStyle(
                     color: themeConsumer.isDark ? Colors.white : Colors.black),
